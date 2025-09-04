@@ -14,7 +14,7 @@ export default function NotFoundScreen() {
           <AlertTriangle size={64} color="#F59E0B" />
           <Text style={styles.title}>Page Not Found</Text>
           <Text style={styles.text}>The page you're looking for doesn't exist.</Text>
-          <Link href="/" style={styles.linkContainer}>
+          <Link href="/" asChild>
             <Button title="Go to Home" onPress={() => {}} />
           </Link>
         </View>
@@ -42,8 +42,5 @@ const styles = StyleSheet.create({
     color: '#D1D5DB',
     textAlign: 'center',
     marginBottom: 32,
-  },
-  linkContainer: {
-    marginTop: 16,
   },
 });
