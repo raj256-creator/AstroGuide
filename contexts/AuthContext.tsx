@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { router } from 'expo-router';
 import { User } from '../types/user';
 
 interface AuthContextType {
@@ -96,6 +97,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       localStorage.removeItem('user');
       setUser(null);
+      router.replace('/');
     } catch (error) {
       console.error('Sign out error:', error);
     }
