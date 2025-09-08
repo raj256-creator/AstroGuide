@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import GradientBackground from '../../components/GradientBackground';
-import { Shield, MessageSquare, Clock, CheckCircle, AlertCircle } from 'lucide-react-native';
+import { Shield, MessageSquare, Clock, CircleCheck as CheckCircle, CircleAlert as AlertCircle } from 'lucide-react-native';
 import { supabase, FeedbackRecord } from '../../lib/supabase';
 
 export default function AdminScreen() {
