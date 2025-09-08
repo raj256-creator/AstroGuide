@@ -18,7 +18,9 @@ export default function ProfileScreen() {
         { 
           text: 'Logout', 
           style: 'destructive',
-          onPress: signOut
+          onPress: () => {
+            signOut();
+          }
         },
       ]
     );
