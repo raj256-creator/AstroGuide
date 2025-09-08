@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Link, Stack } from 'expo-router';
+import { Stack, router } from 'expo-router';
 import GradientBackground from '../components/GradientBackground';
 import Button from '../components/Button';
 import { TriangleAlert as AlertTriangle } from 'lucide-react-native';
@@ -14,9 +14,7 @@ export default function NotFoundScreen() {
           <AlertTriangle size={64} color="#F59E0B" />
           <Text style={styles.title}>Page Not Found</Text>
           <Text style={styles.text}>The page you're looking for doesn't exist.</Text>
-          <Link href="/" asChild>
-            <Button title="Go to Home" onPress={() => {}} />
-          </Link>
+          <Button title="Go to Home" onPress={() => router.push('/')} />
         </View>
       </GradientBackground>
     </>
