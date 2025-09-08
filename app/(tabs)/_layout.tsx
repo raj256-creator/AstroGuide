@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Chrome as Home, Star, Calculator, MessageCircle, User } from 'lucide-react-native';
+import { Chrome as Home, Star, Calculator, MessageCircle, User, Shield } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
@@ -55,6 +55,15 @@ export default function TabLayout() {
           title: 'Feedback',
           tabBarIcon: ({ size, color }) => (
             <MessageCircle size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="admin"
+        options={{
+          title: 'Admin',
+          tabBarIcon: ({ size, color }) => (
+            <Shield size={size} color={color} />
           ),
         }}
       />

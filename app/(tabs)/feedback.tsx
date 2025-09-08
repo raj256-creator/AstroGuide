@@ -4,6 +4,7 @@ import GradientBackground from '../../components/GradientBackground';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { MessageCircle, Send, CircleCheck as CheckCircle } from 'lucide-react-native';
+import { supabase } from '../../lib/supabase';
 
 interface FeedbackData {
   name: string;
@@ -27,8 +28,19 @@ export default function FeedbackScreen() {
     setLoading(true);
     
     try {
-      // For demo purposes, simulate saving to database
-      // In a real app, this would save to Supabase
+      // Save feedback to Supabase
+      const { error } = await supabase
+        .from('feedback')
+        .insert([{
+          name,
+          email,
+          message,
+        }]);
+
+      if (error) {
+        throw error;
+      }
+
       const feedbackData: FeedbackData = {
         name,
         email,
@@ -47,6 +59,7 @@ export default function FeedbackScreen() {
       setTimeout(() => setSubmitted(false), 3000);
       
     } catch (error) {
+      console.error('Error submitting feedback:', error);
       Alert.alert('Error', 'Failed to submit feedback. Please try again.');
     } finally {
       setLoading(false);
