@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { router } from 'expo-router';
+import { Platform } from 'react-native';
 import { User } from '../types/user';
 
 interface AuthContextType {
@@ -31,10 +32,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAuthState = async () => {
     try {
-      // For demo purposes, check localStorage for user session
-      const savedUser = localStorage.getItem('user');
-      if (savedUser) {
-        setUser(JSON.parse(savedUser));
+      // Check for existing session based on platform
+      if (Platform.OS === 'web') {
+        const savedUser = localStorage.getItem('user');
+        if (savedUser) {
+          setUser(JSON.parse(savedUser));
+        }
       }
     } catch (error) {
       console.error('Error checking auth state:', error);
@@ -45,19 +48,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async (email: string, password: string): Promise<boolean> => {
     try {
-      // For demo purposes, simulate authentication
-      // In a real app, this would call Supabase auth
-      const mockUser: User = {
-        id: '1',
-        email,
-        name: email.split('@')[0],
-        dateOfBirth: '1990-01-01',
-        zodiacSign: 'Capricorn',
-        createdAt: new Date().toISOString()
-      };
-      
-      localStorage.setItem('user', JSON.stringify(mockUser));
-      setUser(mockUser);
+      // Simulate authentication with proper validation
+      if (email && password.length >= 6) {
+        const mockUser: User = {
+          id: '1',
+          email,
+          name: email.split('@')[0],
+          dateOfBirth: '1990-01-01',
+          zodiacSign: 'Capricorn',
+          createdAt: new Date().toISOString()
+        };
+        
+        if (Platform.OS === 'web') {
+          localStorage.setItem('user', JSON.stringify(mockUser));
+        }
+        setUser(mockUser);
+        return true;
+      }
       return true;
     } catch (error) {
       console.error('Sign in error:', error);
@@ -73,19 +80,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     zodiacSign: string
   ): Promise<boolean> => {
     try {
-      // For demo purposes, simulate registration
-      // In a real app, this would call Supabase auth and insert user profile
-      const newUser: User = {
-        id: Date.now().toString(),
-        email,
-        name,
-        dateOfBirth,
-        zodiacSign,
-        createdAt: new Date().toISOString()
-      };
-      
-      localStorage.setItem('user', JSON.stringify(newUser));
-      setUser(newUser);
+      // Validate input
+      if (name && email && password.length >= 6 && dateOfBirth && zodiacSign) {
+        const newUser: User = {
+          id: Date.now().toString(),
+          email,
+          name,
+          dateOfBirth,
+          zodiacSign,
+          createdAt: new Date().toISOString()
+        };
+        
+        if (Platform.OS === 'web') {
+          localStorage.setItem('user', JSON.stringify(newUser));
+        }
+        setUser(newUser);
+        return true;
+      }
       return true;
     } catch (error) {
       console.error('Sign up error:', error);
@@ -95,7 +106,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     try {
-      localStorage.removeItem('user');
+      if (Platform.OS === 'web') {
+        localStorage.removeItem('user');
+      }
       setUser(null);
       router.replace('/');
     } catch (error) {

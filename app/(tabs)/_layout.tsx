@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Chrome as Home, Star, Calculator, MessageCircle, User, Shield } from 'lucide-react-native';
+import { Chrome as Home, Star, Calculator, MessageCircle, User, Shield, ShoppingBag } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
@@ -46,6 +46,15 @@ export default function TabLayout() {
           title: 'Numerology',
           tabBarIcon: ({ size, color }) => (
             <Calculator size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="shop"
+        options={{
+          title: 'Shop',
+          tabBarIcon: ({ size, color }) => (
+            <ShoppingBag size={size} color={color} />
           ),
         }}
       />
