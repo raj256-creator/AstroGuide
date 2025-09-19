@@ -32,11 +32,10 @@ A comprehensive astrology and spiritual guidance mobile application built with R
 ### Frontend Framework
 - **React Native**: 0.80.0
 - **Expo SDK**: 54.0.0
-- **Expo Router**: 6.0.17 (File-based routing)
+- **Expo Router**: 6.0.0 (File-based routing)
 - **TypeScript**: 5.8.3
 
 ### UI/UX Libraries
-- **Expo Linear Gradient**: 14.2.3 (Beautiful gradient backgrounds)
 - **Expo Linear Gradient**: 13.0.2 (Beautiful gradient backgrounds)
 - **Lucide React Native**: 0.475.0 (Modern icon library)
 - **React Native Picker**: 2.11.1 (Dropdown selections)
@@ -52,12 +51,13 @@ A comprehensive astrology and spiritual guidance mobile application built with R
 - **Supabase JS Client**: 2.57.2
 
 ### Navigation & Routing
-- **Expo Router**: File-based routing system
+- **Expo Router**: 6.0.0 (File-based routing system)
 - **React Navigation**: 7.0.14 (Bottom tabs navigation)
+- **Expo Linking**: 18.0.0 (Deep linking support)
 - **React Native Screens**: 4.11.0 (Native screen optimization)
 
 ### Development Tools
-- **Expo CLI**: Development and build tools
+- **Expo CLI**: 0.21.17 (Development and build tools)
 - **Metro Bundler**: JavaScript bundler
 - **Babel**: JavaScript compiler
 - **ESLint**: Code linting
@@ -151,7 +151,7 @@ CREATE TABLE feedback (
 ### Prerequisites
 - Node.js (v18 or higher)
 - npm or yarn
-- Expo CLI (`npm install -g @expo/cli`)
+- Expo CLI (installed locally as dev dependency)
 - Supabase account (for database)
 
 ### Installation
@@ -176,6 +176,8 @@ CREATE TABLE feedback (
    ```bash
    npm run dev
    ```
+   
+   Note: This uses the locally installed Expo CLI via `npx expo start`
 
 5. **Open the app**
    - Scan QR code with Expo Go app (mobile)
@@ -337,12 +339,18 @@ Automatic zodiac sign calculation based on birth date:
 ```json
 {
   "dependencies": {
-    "expo": "^54.0.0",
+    "expo": "~54.0.0",
     "expo-router": "~6.0.0",
+    "expo-linking": "~18.0.0",
+    "expo-linear-gradient": "~13.0.2",
     "react": "19.0.0",
     "react-native": "0.80.0",
     "@supabase/supabase-js": "^2.57.2",
     "lucide-react-native": "^0.475.0"
+  },
+  "devDependencies": {
+    "@expo/cli": "^0.21.17",
+    "typescript": "~5.8.3"
   }
 }
 ```
