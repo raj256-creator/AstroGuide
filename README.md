@@ -37,6 +37,7 @@ A comprehensive astrology and spiritual guidance mobile application built with R
 
 ### UI/UX Libraries
 - **Expo Linear Gradient**: 14.2.3 (Beautiful gradient backgrounds)
+- **Expo Linear Gradient**: 13.0.2 (Beautiful gradient backgrounds)
 - **Lucide React Native**: 0.475.0 (Modern icon library)
 - **React Native Picker**: 2.11.1 (Dropdown selections)
 - **React Native Gesture Handler**: 2.25.0 (Touch interactions)
