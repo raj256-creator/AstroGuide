@@ -62,6 +62,13 @@ export default function ShopScreen() {
                 <ShoppingBag size={64} color="#6B7280" />
                 <Text style={styles.emptyTitle}>Your cart is empty</Text>
                 <Text style={styles.emptyText}>Add some items to get started!</Text>
+               <View style={styles.emptyCartButton}>
+                 <Button 
+                   title="Continue Shopping" 
+                   onPress={() => setShowCart(false)}
+                   variant="primary"
+                 />
+               </View>
               </View>
             ) : (
               <>
@@ -302,6 +309,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#9CA3AF',
     marginTop: 8,
+  },
+  emptyCartButton: {
+    marginTop: 24,
+    width: '100%',
+    maxWidth: 200,
   },
   cartItem: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
