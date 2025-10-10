@@ -30,7 +30,7 @@ A comprehensive astrology and spiritual guidance mobile application built with R
 ## 🛠 Technologies Used
 
 ### Frontend Framework
-- **React Native**: 0.80.0
+- **React Native**: 0.76.3
 - **Expo SDK**: 54.0.0
 - **Expo Router**: 6.0.0 (File-based routing)
 - **TypeScript**: 5.8.3
@@ -40,7 +40,7 @@ A comprehensive astrology and spiritual guidance mobile application built with R
 - **Lucide React Native**: 0.475.0 (Modern icon library)
 - **React Native Picker**: 2.11.1 (Dropdown selections)
 - **React Native Gesture Handler**: 2.25.0 (Touch interactions)
-- **React Native Reanimated**: 3.18.4 (Smooth animations)
+- **React Native Reanimated**: 3.10.1 (Smooth animations)
 
 ### Backend & Database
 - **Supabase**: Backend-as-a-Service
@@ -53,15 +53,12 @@ A comprehensive astrology and spiritual guidance mobile application built with R
 ### Navigation & Routing
 - **Expo Router**: 6.0.0 (File-based routing system)
 - **React Navigation**: 7.0.14 (Bottom tabs navigation)
-- **Expo Linking**: 18.0.0 (Deep linking support)
 - **React Native Screens**: 4.11.0 (Native screen optimization)
 
 ### Development Tools
 - **Expo CLI**: 0.21.17 (Development and build tools)
 - **Metro Bundler**: JavaScript bundler
 - **Babel**: JavaScript compiler
-- **ESLint**: Code linting
-- **Prettier**: Code formatting
 
 ### Platform Support
 - **iOS**: Native iOS app support
@@ -73,21 +70,21 @@ A comprehensive astrology and spiritual guidance mobile application built with R
 ### File-based Routing (Expo Router)
 ```
 app/
-├── _layout.tsx                 # Root layout with providers
-├── index.tsx                   # Welcome/landing screen
-├── +not-found.tsx             # 404 error screen
+├── _layout.tsx                # Root layout with providers
+├── index.tsx                  # Welcome/landing screen
+├── +not-found.tsx            # 404 error screen
 ├── auth/
-│   ├── login.tsx              # Login screen
-│   └── register.tsx           # Registration screen
-└── (tabs)/                    # Tab-based navigation
-    ├── _layout.tsx            # Tab layout configuration
-    ├── index.tsx              # Home screen
-    ├── horoscope.tsx          # Daily horoscope screen
-    ├── numerology.tsx         # Numerology calculator
-    ├── shop.tsx               # Shopping system
-    ├── feedback.tsx           # User feedback form
-    ├── admin.tsx              # Admin dashboard
-    └── profile.tsx            # User profile screen
+│   ├── login.tsx             # Login screen
+│   └── register.tsx          # Registration screen
+└── (tabs)/                   # Tab-based navigation
+    ├── _layout.tsx           # Tab layout configuration
+    ├── index.tsx             # Home screen
+    ├── horoscope.tsx         # Daily horoscope screen
+    ├── numerology.tsx        # Numerology calculator
+    ├── shop.tsx              # Shopping system
+    ├── feedback.tsx          # User feedback form
+    ├── admin.tsx             # Admin dashboard
+    └── profile.tsx           # User profile screen
 ```
 
 ### Component Architecture
@@ -151,7 +148,7 @@ CREATE TABLE feedback (
 ### Prerequisites
 - Node.js (v18 or higher)
 - npm or yarn
-- Expo CLI (installed locally as dev dependency)
+- Expo CLI (installed globally or use npx)
 - Supabase account (for database)
 
 ### Installation
@@ -169,8 +166,12 @@ CREATE TABLE feedback (
 
 3. **Set up Supabase**
    - Create a new Supabase project
-   - Click "Connect to Supabase" in the app interface
-   - Configure your environment variables
+   - Get your project URL and anon key from the Supabase dashboard
+   - Create a `.env` file in the project root with:
+     ```
+     EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
+     EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+     ```
 
 4. **Run the development server**
    ```bash
@@ -180,22 +181,16 @@ CREATE TABLE feedback (
    Note: This uses the locally installed Expo CLI via `npx expo start`
 
 5. **Open the app**
-   - Scan QR code with Expo Go app (mobile)
+   - Download Expo Go app on your mobile device
+   - Scan the QR code displayed in the terminal
    - Press 'w' to open in web browser
    - Press 'i' for iOS simulator
    - Press 'a' for Android emulator
-
-### Environment Variables
-```env
-EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
-EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
 
 ## 📋 Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build:web` - Build for web deployment
-- `npm run lint` - Run ESLint code analysis
 
 ## 🎨 Design System
 
@@ -316,44 +311,11 @@ Automatic zodiac sign calculation based on birth date:
 
 ## 🔧 Configuration Files
 
-### app.json (Expo Configuration)
-```json
-{
-  "expo": {
-    "name": "bolt-expo-nativewind",
-    "slug": "bolt-expo-nativewind",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "newArchEnabled": true,
-    "plugins": [
-      "expo-router",
-      "expo-font",
-      "expo-web-browser",
-      "expo-camera"
-    ]
-  }
-}
-```
-
-### package.json Dependencies
-```json
-{
-  "dependencies": {
-    "expo": "~54.0.0",
-    "expo-router": "~6.0.0",
-    "expo-linking": "~18.0.0",
-    "expo-linear-gradient": "~13.0.2",
-    "react": "19.0.0",
-    "react-native": "0.80.0",
-    "@supabase/supabase-js": "^2.57.2",
-    "lucide-react-native": "^0.475.0"
-  },
-  "devDependencies": {
-    "@expo/cli": "^0.21.17",
-    "typescript": "~5.8.3"
-  }
-}
-```
+The project uses standard Expo configuration files:
+- `app.json` - Expo app configuration
+- `package.json` - Dependencies and scripts
+- `tsconfig.json` - TypeScript configuration
+- `.env` - Environment variables (create this file)
 
 ## 🚀 Deployment
 
@@ -361,18 +323,18 @@ Automatic zodiac sign calculation based on birth date:
 ```bash
 npm run build:web
 ```
-Output: `dist/` directory ready for static hosting
+The build output will be in the `dist/` directory, ready for static hosting.
 
 ### Mobile Deployment
-1. **Development Build**
+1. **Using EAS Build (Recommended)**
    ```bash
-   expo build:ios
-   expo build:android
+   npx eas build --platform all
    ```
 
-2. **Production Build**
+2. **Classic Build (Legacy)**
    ```bash
-   eas build --platform all
+   npx expo build:ios
+   npx expo build:android
    ```
 
 ### Supported Platforms
@@ -380,7 +342,7 @@ Output: `dist/` directory ready for static hosting
 - **Android**: Google Play Store deployment
 - **Web**: Static hosting (Netlify, Vercel, etc.)
 
-## 🧪 Testing
+## 🧪 Testing & Development
 
 ### Manual Testing Checklist
 - [ ] User registration and login
@@ -390,6 +352,12 @@ Output: `dist/` directory ready for static hosting
 - [ ] Feedback submission
 - [ ] Admin dashboard operations
 - [ ] Cross-platform compatibility
+
+### Development Notes
+- The app uses mock authentication for development
+- Supabase integration is set up for the feedback system
+- All data is stored locally in development mode
+- The shopping cart persists in localStorage (web) or AsyncStorage (mobile)
 
 ## 🤝 Contributing
 
@@ -424,6 +392,7 @@ For support, email support@astroguide.app or create an issue in the repository.
   - Shopping system
   - Admin dashboard
   - Feedback management
+  - Cross-platform support (iOS, Android, Web)
 
 ---
 
