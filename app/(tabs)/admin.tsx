@@ -3,7 +3,16 @@ import { View, Text, StyleSheet, ScrollView, RefreshControl, TouchableOpacity } 
 import { Picker } from '@react-native-picker/picker';
 import GradientBackground from '../../components/GradientBackground';
 import { Shield, MessageSquare, Clock, CircleCheck as CheckCircle, CircleAlert as AlertCircle } from 'lucide-react-native';
-import { supabase, FeedbackRecord } from '../../lib/supabase';
+
+interface FeedbackRecord {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  status: 'pending' | 'reviewed' | 'resolved';
+  created_at: string;
+  updated_at: string;
+}
 
 export default function AdminScreen() {
   const [feedback, setFeedback] = useState<FeedbackRecord[]>([]);
@@ -17,13 +26,28 @@ export default function AdminScreen() {
 
   const fetchFeedback = async () => {
     try {
-      const { data, error } = await supabase
-        .from('feedback')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setFeedback(data || []);
+      // Mock data for demo purposes
+      const mockData: FeedbackRecord[] = [
+        {
+          id: '1',
+          name: 'John Doe',
+          email: 'john@example.com',
+          message: 'Great app! Love the horoscope feature.',
+          status: 'pending',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        },
+        {
+          id: '2',
+          name: 'Jane Smith',
+          email: 'jane@example.com',
+          message: 'The numerology calculator is very accurate.',
+          status: 'reviewed',
+          created_at: new Date(Date.now() - 86400000).toISOString(),
+          updated_at: new Date(Date.now() - 86400000).toISOString(),
+        },
+      ];
+      setFeedback(mockData);
     } catch (error) {
       console.error('Error fetching feedback:', error);
     } finally {
@@ -34,13 +58,6 @@ export default function AdminScreen() {
 
   const updateFeedbackStatus = async (id: string, status: 'pending' | 'reviewed' | 'resolved') => {
     try {
-      const { error } = await supabase
-        .from('feedback')
-        .update({ status })
-        .eq('id', id);
-
-      if (error) throw error;
-      
       // Update local state
       setFeedback(prev => 
         prev.map(item => 
