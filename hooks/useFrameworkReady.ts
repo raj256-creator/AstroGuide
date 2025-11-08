@@ -7,3 +7,4 @@ export function useFrameworkReady() {
       window.frameworkReady();
     }
   });
+}
