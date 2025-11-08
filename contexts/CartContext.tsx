@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Platform } from 'react-native';
 import { CartItem, ShopItem, Order } from '../types/shop';
 
 interface CartContextType {
@@ -28,7 +27,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Load cart from storage on mount
-    if (Platform.OS === 'web') {
+    if (typeof window !== 'undefined' && window.localStorage) {
       const savedCart = localStorage.getItem('cart');
       if (savedCart) {
         setCartItems(JSON.parse(savedCart));
@@ -38,7 +37,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Save cart to storage whenever it changes
-    if (Platform.OS === 'web') {
+    if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.setItem('cart', JSON.stringify(cartItems));
     }
   }, [cartItems]);
@@ -98,7 +97,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       };
 
       // Save order to storage (in real app, this would be sent to backend)
-      if (Platform.OS === 'web') {
+      if (typeof window !== 'undefined' && window.localStorage) {
         const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
         localStorage.setItem('orders', JSON.stringify([...existingOrders, order]));
       }

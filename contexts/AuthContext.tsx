@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { router } from 'expo-router';
-import { Platform } from 'react-native';
 import { User } from '../types/user';
 
 interface AuthContextType {
@@ -32,8 +31,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAuthState = async () => {
     try {
-      // Check for existing session based on platform
-      if (Platform.OS === 'web') {
+      // Check for existing session
+      if (typeof window !== 'undefined' && window.localStorage) {
         const savedUser = localStorage.getItem('user');
         if (savedUser) {
           setUser(JSON.parse(savedUser));
@@ -59,7 +58,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           createdAt: new Date().toISOString()
         };
         
-        if (Platform.OS === 'web') {
+        if (typeof window !== 'undefined' && window.localStorage) {
           localStorage.setItem('user', JSON.stringify(mockUser));
         }
         setUser(mockUser);
@@ -91,7 +90,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           createdAt: new Date().toISOString()
         };
         
-        if (Platform.OS === 'web') {
+        if (typeof window !== 'undefined' && window.localStorage) {
           localStorage.setItem('user', JSON.stringify(newUser));
         }
         setUser(newUser);
@@ -106,7 +105,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     try {
-      if (Platform.OS === 'web') {
+      if (typeof window !== 'undefined' && window.localStorage) {
         localStorage.removeItem('user');
       }
       setUser(null);

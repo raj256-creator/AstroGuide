@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Alert, TextInput } from 'react-nati
 import GradientBackground from '../../components/GradientBackground';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { MessageCircle, Send, CircleCheck as CheckCircle } from 'lucide-react-native';
+import { MessageCircle, CheckCircle } from 'lucide-react-native';
 
 interface FeedbackData {
   name: string;

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Stack, router } from 'expo-router';
 import GradientBackground from '../components/GradientBackground';
 import Button from '../components/Button';
-import { TriangleAlert as AlertTriangle } from 'lucide-react-native';
+import { AlertTriangle } from 'lucide-react-native';
 
 export default function NotFoundScreen() {
   return (
